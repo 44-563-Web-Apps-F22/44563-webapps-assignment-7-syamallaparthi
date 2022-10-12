@@ -36,15 +36,17 @@
         <button type="button" class="btn btn-secondary" onclick="recordReact()"> React Now </button>
     </div>
     <script>
-        let myTime;
+        let myTime, countDown;
+        
         function recordReact() {
             myTime = Date.now();
             console.log(myTime);
         }
-
+        
+        countdown = Math.floor(Math.random() * 9) + 2;
         function startTime() {
             let mytime = Date.now();
-            for (let num = 0; num < 4; num++) {
+            for (let num = 0; num < countDown; num++) {
                 setTimeout(() => {
                     document.getElementById("countdown").innerHTML = num;
                 },(3 - num) * 1000);
