@@ -126,6 +126,11 @@
             </div>
         </div>
     </div>
+    <br>
+    <div class="container text-center">
+        <button class="btn btn-primary" type="submit" onclick="GameReset()">Reset</button>
+    </div>
+    <br>
 </div>
 
 <script>
@@ -153,38 +158,47 @@
     }
 
     function help() {
-        chest_rows = parseInt(lastCheck / 5);
-        chest_columns = parseInt(lastCheck % 5);
-        tresurechest_row = parseInt(treasureLocation / 5);
-        treasurechest_column = parseInt(treasureLocation % 5);
-        score += 2;
-        document.getElementById("score").innerHTML = "Score is: " + score;
+        Check_row = parseInt(lastCheck / 5)
+        Check_column = parseInt(lastCheck % 5)
+        treasureLocationRow = parseInt(treasureLocation / 5)
+        treasureLocationColumn = parseInt(treasureLocation % 5)
+        score += 2
+        document.getElementById("score").innerHTML = "Score is " + score
+        if(Check_row == treasureLocationRow) {
+            if(Check_column < treasureLocationColumn) {
+                document.getElementById("help").innerHTML = "Right"
+            } else if(Check_column > treasureLocationColumn) {
+                document.getElementById("help").innerHTML = "Left"
+            } else {
+                document.getElementById("help").innerHTML = "Sorry, no help available"
+            }
+        } else if(Check_column == treasureLocationColumn) {
+            if(Check_row < treasureLocationRow) {
+                document.getElementById("help").innerHTML = "Down"
+            } else if(Check_row > treasureLocationRsniow) {
+                document.getElementById("help").innerHTML = "Up"
+            } else {
+                document.getElementById("help").innerHTML = "Sorry, no help available"
+            }
+        } else {
+            document.getElementById("help").innerHTML = "Sorry, no help available"
+        }
+    }
 
-        if(chest_row == tresurechest_row){
-            if(chest_column > treasurechest_column) {
-                document.getElementById("help").innerHTML = "Left";
-            } 
-            else if(chest_column < treasurechest_column) {
-                document.getElementById("help").innerHTML = "Right";
-            } 
-            else {
-                document.getElementById("help").innerHTML = "Sorry, no help available";
-            }
+    function GameReset() {
+        treasureLocation = Math.floor(Math.random() * 24)
+        while(treasureLocation == 12) {
+            treasureLocation = Math.floor(Math.random() * 24)
         }
-        else if(chest_column == treasurechest_column) {
-            if(chest_row > tresurechest_row) {
-                document.getElementById("help").innerHTML = "Up";
-            } 
-            else if(chest_row < tresurechest_row) {
-                document.getElementById("help").innerHTML = "Down";
-            } 
-            else {
-                document.getElementById("help").innerHTML = "Sorry, no help available";
+        chestCount = 0
+        score = 0
+        document.getElementById("chests").innerHTML = "Number of chests checked is zero"
+        document.getElementById("score").innerHTML = "Score is unknown"
+        document.getElementById("help").innerHTML = "Help report"
+        for(let val = 0; val < 24; val++) {
+            if(i != 12) {
+                document.getElementById(ids[i]).src = "Treasure Chest.jpg"
             }
-    
-        }
-        else {
-            document.getElementById("help").innerHTML = "Sorry, no help available";
         }
     }
 
